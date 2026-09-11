@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#111217">
+  <meta name="description" content="Игра «Шпион» с тайной раздачей слов на одном телефоне.">
+  <title>Шпион</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section id="home-screen" class="screen active" aria-labelledby="home-title">
+      <div class="brand-mark" aria-hidden="true">?</div>
+      <p class="eyebrow">Игра для компании</p>
+      <h1 id="home-title">ШПИОН</h1>
+      <p class="lead">У всех похожие слова. Но кто-то получил другое.</p>
+      <button id="start-game-btn" class="button button-primary button-large">
+        НАЧАТЬ ПАРТИЮ
+      </button>
+    </section>
+
+    <section id="settings-screen" class="screen" aria-labelledby="settings-title">
+      <div class="screen-heading">
+        <p class="eyebrow">Перед раздачей</p>
+        <h2 id="settings-title">Настройки партии</h2>
+      </div>
+
+      <div class="settings-card">
+        <div class="setting-row">
+          <div>
+            <label for="players-value">Количество игроков</label>
+            <p class="setting-hint">Минимум 3 человека</p>
+          </div>
+          <div class="stepper" aria-label="Количество игроков">
+            <button id="players-minus" class="stepper-button" type="button" aria-label="Уменьшить количество игроков">−</button>
+            <output id="players-value" class="stepper-value">6</output>
+            <button id="players-plus" class="stepper-button" type="button" aria-label="Увеличить количество игроков">+</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="setting-row">
+          <div>
+            <label for="spies-value">Количество шпионов</label>
+            <p class="setting-hint">Минимум 1 шпион</p>
+          </div>
+          <div class="stepper" aria-label="Количество шпионов">
+            <button id="spies-minus" class="stepper-button" type="button" aria-label="Уменьшить количество шпионов">−</button>
+            <output id="spies-value" class="stepper-value">1</output>
+            <button id="spies-plus" class="stepper-button" type="button" aria-label="Увеличить количество шпионов">+</button>
+          </div>
+        </div>
+      </div>
+
+      <p id="recommendation" class="recommendation"></p>
+      <p id="settings-error" class="error-message" role="alert"></p>
+
+      <button id="deal-btn" class="button button-primary button-large">
+        РАЗДАТЬ КАРТОЧКИ
+      </button>
+
+      <button id="settings-end-btn" class="button button-ghost hidden">
+        ЗАКОНЧИТЬ ИГРУ
+      </button>
+    </section>
+
+    <section id="card-screen" class="screen" aria-labelledby="card-title">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="round-label">Партия 1</span>
+          <span id="player-progress">Игрок 1 из 6</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div id="card-stage" class="card-stage">
+        <article id="secret-card" class="secret-card" tabindex="0" role="button" aria-live="polite">
+          <div id="card-closed-content" class="card-face">
+            <p class="card-kicker">КАРТОЧКА ИГРОКА</p>
+            <h2 id="card-title" class="player-number">1</h2>
+            <div class="eye-icon" aria-hidden="true">◉</div>
+            <p>Убедись, что никто не смотрит на экран</p>
+            <strong>Свайпни или нажми, чтобы увидеть слово</strong>
+          </div>
+
+          <div id="card-revealed-content" class="card-face hidden">
+            <p class="card-kicker">ТВОЁ СЛОВО</p>
+            <h2 id="secret-word" class="secret-word">СЛОВО</h2>
+            <p>Запомни его и никому не показывай</p>
+            <strong>Свайпни или нажми ещё раз, чтобы скрыть</strong>
+          </div>
+        </article>
+
+        <div id="handoff-panel" class="handoff-panel hidden">
+          <div class="locked-icon" aria-hidden="true">✓</div>
+          <h2>Карточка закрыта</h2>
+          <p id="handoff-text">Передайте телефон игроку 2</p>
+          <button id="ready-next-btn" class="button button-primary button-large">
+            Я ГОТОВ
+          </button>
+        </div>
+      </div>
+
+      <p class="swipe-hint">Можно свайпать в любую сторону</p>
+    </section>
+
+    <section id="complete-screen" class="screen" aria-labelledby="complete-title">
+      <div class="complete-icon" aria-hidden="true">✓</div>
+      <p class="eyebrow">Раздача завершена</p>
+      <h2 id="complete-title">Все карточки розданы</h2>
+      <p class="lead">Уберите телефон и начинайте обсуждение. Найдите тех, у кого другое слово.</p>
+
+      <div class="summary-card">
+        <span>Партия</span>
+        <strong id="complete-round">1</strong>
+        <span>Использовано пар</span>
+        <strong id="used-count">1 из 2000</strong>
+      </div>
+
+      <button id="next-round-btn" class="button button-primary button-large">
+        НАЧАТЬ СЛЕДУЮЩУЮ ПАРТИЮ
+      </button>
+      <button id="change-settings-btn" class="button button-secondary">
+        ИЗМЕНИТЬ НАСТРОЙКИ
+      </button>
+      <button id="end-game-btn" class="button button-danger">
+        ЗАКОНЧИТЬ ИГРУ
+      </button>
+    </section>
+  </main>
+
+  <div id="confirm-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <p class="eyebrow">Завершение игры</p>
+      <h2 id="confirm-title">Закончить игру?</h2>
+      <p>История использованных слов очистится, и в новой игре они снова смогут выпадать.</p>
+      <button id="confirm-end-btn" class="button button-danger button-large">ЗАКОНЧИТЬ</button>
+      <button id="cancel-end-btn" class="button button-ghost">ПРОДОЛЖИТЬ ИГРУ</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="words.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
