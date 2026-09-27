@@ -810,11 +810,32 @@ h2 {
    ========================= */
 
 .home-screen {
+  position: relative;
+  z-index: 1;
+
   justify-content: flex-start;
   align-items: center;
   text-align: center;
 
   padding-top: 18px;
+}
+.home-screen::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      rgba(8, 9, 13, 0.50),
+      rgba(8, 9, 13, 0.80)
+    ),
+    url("assets/spy-dossier-bg.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .home-spy-wrap {
