@@ -811,67 +811,118 @@ h2 {
 
 .home-screen {
   justify-content: flex-start;
-  padding-top: 24px;
+  align-items: center;
+  text-align: center;
+
+  padding-top: 18px;
 }
 
 .home-spy-wrap {
   width: 100%;
+
   display: flex;
   justify-content: center;
 
-  margin-bottom: -12px;
+  margin-bottom: -42px;
 
   pointer-events: none;
+
+  position: relative;
+  z-index: 1;
 }
 
 .home-spy {
   display: block;
 
-  width: min(74vw, 390px);
+  width: min(88vw, 520px);
   height: auto;
 
   object-fit: contain;
 
   filter:
-    drop-shadow(0 20px 35px rgba(0, 0, 0, 0.55))
-    drop-shadow(0 0 22px rgba(242, 193, 78, 0.12));
+    drop-shadow(0 24px 40px rgba(0, 0, 0, 0.58))
+    drop-shadow(0 0 24px rgba(242, 193, 78, 0.16));
 }
 
 .home-eyebrow {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 620px;
+
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+
+  text-align: left;
+
+  transform: translate(24px, -6px);
 }
 
-.home-title {
-  margin: 0;
+#home-title.home-title {
+  position: relative;
+  z-index: 2;
 
-  font-size: clamp(4rem, 14vw, 6.5rem);
-  line-height: 0.78;
+  width: min(88vw, 520px);
+  max-width: none;
 
-  letter-spacing: -0.065em;
+  margin: -8px auto 0;
 
-  font-weight: 900;
+  text-align: center;
+
+  font-size: clamp(5rem, 17vw, 7.5rem);
+  line-height: 0.77;
+  letter-spacing: -0.06em;
+  font-weight: 800;
 }
 
-.home-title span {
+#home-title.home-title .home-title-line {
   display: block;
+  width: 100%;
+}
+
+#home-title.home-title .home-title-d {
+  display: inline-block;
+
+  font-size: 0.94em;
+  transform: translateY(-0.035em);
 }
 
 .home-lead {
-  margin-top: 26px;
-  margin-bottom: 38px;
+  position: relative;
+  left: 50%;
+  transform: translateX(calc(-50% - 12px));
+
+  width: max-content;
+  max-width: 96vw;
+
+  margin: 30px 0 38px;
+
+  text-align: center;
+  color: var(--muted);
+
+  font-size: clamp(1.1rem, 3vw, 1.32rem);
+  line-height: 1.4;
+  letter-spacing: 0.005em;
+
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .home-actions {
   width: 100%;
+  max-width: 620px;
 
   display: flex;
   flex-direction: column;
-
   gap: 12px;
 }
 
 .home-actions .button {
   width: 100%;
+  margin-top: 0;
+
+  font-size: 1.08rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
 }
-font-size: clamp(4rem, 14vw, 6.5rem);
