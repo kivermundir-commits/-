@@ -190,7 +190,7 @@
     const availablePairs = window.wordPairs.filter((pair) => !usedIds.has(pair.id));
 
     if (availablePairs.length === 0) {
-      showToast("Все 2000 пар уже использованы. Завершите игру, чтобы очистить историю.");
+      showToast(`Все ${window.wordPairs.length} пар уже использованы. Завершите игру, чтобы очистить историю.`);
       openEndModal();
       return;
     }
@@ -409,3 +409,16 @@
 
   restoreInterface();
 })();
+window.addEventListener("load", () => {
+  const splash = document.getElementById("studio-splash");
+
+  if (!splash) return;
+
+  setTimeout(() => {
+    splash.classList.add("is-hiding");
+
+    setTimeout(() => {
+      splash.remove();
+    }, 350);
+  }, 1500);
+});
