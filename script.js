@@ -13,12 +13,17 @@
   const screens = [...document.querySelectorAll(".screen")];
 
   const elements = {
+    rules: document.getElementById("rules-screen"),
+rulesButton: document.getElementById("rules-btn"),
+rulesBack: document.getElementById("rules-back-btn"),
     home: document.getElementById("home-screen"),
     settings: document.getElementById("settings-screen"),
     card: document.getElementById("card-screen"),
     complete: document.getElementById("complete-screen"),
+    completeRulesButton: document.getElementById("complete-rules-btn"),
 
     startGame: document.getElementById("start-game-btn"),
+    settingsBack: document.getElementById("settings-back-btn"),
     playersMinus: document.getElementById("players-minus"),
     playersPlus: document.getElementById("players-plus"),
     spiesMinus: document.getElementById("spies-minus"),
@@ -53,6 +58,8 @@
     cancelEnd: document.getElementById("cancel-end-btn"),
     toast: document.getElementById("toast")
   };
+  let rulesReturnScreen = "home";
+  let settingsReturnScreen = "home";
 
   const defaultState = () => ({
     sessionActive: false,
@@ -335,12 +342,33 @@
     showScreen("settings");
   }
 
-  elements.startGame.addEventListener("click", () => {
-    state.sessionActive = false;
-    state.screen = "settings";
-    renderSettings();
-    showScreen("settings");
-  });
+ elements.startGame.addEventListener("click", () => {
+  settingsReturnScreen = "home";
+
+  state.sessionActive = false;
+  state.screen = "settings";
+  renderSettings();
+  showScreen("settings");
+});
+
+elements.rulesButton.addEventListener("click", () => {
+  rulesReturnScreen = "home";
+  showScreen("rules");
+});
+
+elements.rulesButton.addEventListener("click", () => {
+  rulesReturnScreen = "home";
+  showScreen("rules");
+});
+
+elements.completeRulesButton.addEventListener("click", () => {
+  rulesReturnScreen = "complete";
+  showScreen("rules");
+});
+
+elements.rulesBack.addEventListener("click", () => {
+  showScreen(rulesReturnScreen);
+});
 
   elements.playersMinus.addEventListener("click", () => changePlayers(-1));
   elements.playersPlus.addEventListener("click", () => changePlayers(1));
@@ -365,6 +393,10 @@
     },
     { passive: true }
   );
+  elements.settingsBack.addEventListener("click", () => {
+  state.screen = settingsReturnScreen;
+  showScreen(settingsReturnScreen);
+});
 
   elements.secretCard.addEventListener(
     "touchend",
@@ -391,6 +423,7 @@
 
   elements.changeSettings.addEventListener("click", () => {
     renderSettings();
+    settingsReturnScreen = "complete";
     showScreen("settings");
   });
 

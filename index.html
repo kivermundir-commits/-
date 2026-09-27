@@ -35,7 +35,162 @@
       <button id="start-game-btn" class="button button-primary button-large">
         НАЧАТЬ ПАРТИЮ
       </button>
+      <button id="rules-btn" class="button button-secondary">
+  КАК ИГРАТЬ
+</button>
     </section>
+    <section id="rules-screen" class="screen rules-screen" aria-labelledby="rules-title">
+
+  <div class="rules-header">
+    <p class="eyebrow">Памятка</p>
+    <h2 id="rules-title">Как играть</h2>
+  </div>
+
+  <div class="rules-list">
+
+    <article class="rule-card">
+      <span class="rule-number">1</span>
+      <div>
+        <h3>Раздача слов</h3>
+
+        <p>
+          Каждый игрок по очереди берёт телефон и смотрит свою карточку.
+          Большинство игроков получает одно слово, а несколько человек —
+          другое, похожее по смыслу.
+        </p>
+
+        <p class="rule-important">
+          Никто не знает, является ли он шпионом.
+          На карточке показывается только слово.
+        </p>
+      </div>
+    </article>
+
+    <article class="rule-card">
+      <span class="rule-number">2</span>
+      <div>
+        <h3>Обсуждение</h3>
+
+        <p>
+          После раздачи игроки <strong>по очереди</strong> говорят короткую
+          ассоциацию, признак или характеристику своего слова.
+        </p>
+
+        <p>
+          Нельзя называть само слово напрямую. Нужно сказать достаточно,
+          чтобы показать, что ты понимаешь тему, но не раскрыть слово слишком явно.
+        </p>
+
+        <p>
+          После первого круга можно продолжать обсуждение,
+          задавать вопросы и сравнивать ответы игроков.
+        </p>
+      </div>
+    </article>
+
+    <article class="rule-card">
+      <span class="rule-number">3</span>
+      <div>
+        <h3>Изгнание игроков</h3>
+
+        <p>
+          Когда коллектив готов голосовать, выбираются подозрительные игроки.
+        </p>
+
+        <p>
+          За один этап можно изгнать <strong>не только одного человека</strong>.
+          Если большинство игроков считает подозрительными сразу двух или трёх
+          участников, можно исключить их всех.
+        </p>
+
+        <p>
+          Каждое изгнание должно быть решением большинства.
+        </p>
+
+        <p class="rule-warning">
+          После изгнания игрок не говорит своё слово!
+        </p>
+      </div>
+    </article>
+
+    <article class="rule-card">
+      <span class="rule-number">4</span>
+      <div>
+        <h3>Продолжать или завершать?</h3>
+
+        <p>
+          После изгнания одного или нескольких игроков оставшиеся участники
+          решают, что делать дальше.
+        </p>
+
+        <p>
+          Если коллектив считает, что шпионы уже могли быть исключены,
+          можно принять решение <strong>завершить партию и вскрыться</strong>.
+        </p>
+
+        <p>
+          Если уверенности нет, обсуждение продолжается и позже можно
+          провести новое изгнание.
+        </p>
+      </div>
+    </article>
+
+    <article class="rule-card">
+      <span class="rule-number">5</span>
+      <div>
+        <h3>Завершение партии</h3>
+
+        <p>
+          Если игроки продолжают изгнания и в игре остаётся
+          <strong>половина первоначального состава</strong>,
+          партия принудительно завершается.
+        </p>
+
+        <p>
+          Дальнейшие изгнания уже не проводятся.
+        </p>
+
+        <p>
+          Половина игроков — максимальный предел,
+          до которого может продолжаться партия.
+        </p>
+      </div>
+    </article>
+
+    <article class="rule-card">
+      <span class="rule-number">6</span>
+      <div>
+        <h3>Вскрытие</h3>
+
+        <p>
+          Когда партия закончена, все участники, включая ранее изгнанных,
+          по очереди говорят, <strong>какое слово у них было</strong>.
+        </p>
+
+        <p>После этого становится понятно:</p>
+
+        <ul>
+          <li>какое слово было у большинства;</li>
+          <li>какое слово было у меньшинства;</li>
+          <li>кто оказался шпионом;</li>
+          <li>удалось ли исключить всех шпионов.</li>
+        </ul>
+
+        <p class="rule-result">
+          Если все шпионы были изгнаны, победили игроки.
+          Если хотя бы один шпион остался в игре к моменту завершения партии,
+          победили шпионы.
+        </p>
+      </div>
+    </article>
+
+  </div>
+
+  <button id="rules-back-btn" class="button button-primary">
+    НАЗАД
+  </button>
+
+</section>
 
     <section id="settings-screen" class="screen" aria-labelledby="settings-title">
       <div class="screen-heading">
@@ -75,8 +230,11 @@
       <p id="settings-error" class="error-message" role="alert"></p>
 
       <button id="deal-btn" class="button button-primary button-large">
-        РАЗДАТЬ КАРТОЧКИ
+        РАЗДАТЬ КАРТОЧКИ С НОВЫМИ НАСТРОЙКАМИ
       </button>
+      <button id="settings-back-btn" class="button button-secondary">
+  НАЗАД
+</button>
 
       <button id="settings-end-btn" class="button button-ghost hidden">
         ЗАКОНЧИТЬ ИГРУ
@@ -144,6 +302,9 @@
       <button id="change-settings-btn" class="button button-secondary">
         ИЗМЕНИТЬ НАСТРОЙКИ
       </button>
+      <button id="complete-rules-btn" class="button button-secondary">
+  КАК ИГРАТЬ
+</button>
       <button id="end-game-btn" class="button button-danger">
         ЗАКОНЧИТЬ ИГРУ
       </button>
