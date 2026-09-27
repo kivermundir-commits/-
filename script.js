@@ -341,6 +341,16 @@ rulesBack: document.getElementById("rules-back-btn"),
 
     showScreen("settings");
   }
+  async function startRoundWithInternetCheck() {
+  const online = await hasInternetConnection();
+
+  if (!online) {
+    showNoInternet();
+    return;
+  }
+
+  startRound();
+}
 
  elements.startGame.addEventListener("click", () => {
   settingsReturnScreen = "home";
@@ -349,11 +359,6 @@ rulesBack: document.getElementById("rules-back-btn"),
   state.screen = "settings";
   renderSettings();
   showScreen("settings");
-});
-
-elements.rulesButton.addEventListener("click", () => {
-  rulesReturnScreen = "home";
-  showScreen("rules");
 });
 
 elements.rulesButton.addEventListener("click", () => {
@@ -374,7 +379,7 @@ elements.rulesBack.addEventListener("click", () => {
   elements.playersPlus.addEventListener("click", () => changePlayers(1));
   elements.spiesMinus.addEventListener("click", () => changeSpies(-1));
   elements.spiesPlus.addEventListener("click", () => changeSpies(1));
-  elements.deal.addEventListener("click", startRound);
+  elements.deal.addEventListener("click", startRoundWithInternetCheck);
 
   elements.secretCard.addEventListener("click", advanceCardStage);
   elements.secretCard.addEventListener("keydown", (event) => {
@@ -419,7 +424,7 @@ elements.rulesBack.addEventListener("click", () => {
   );
 
   elements.readyNext.addEventListener("click", nextPlayer);
-  elements.nextRound.addEventListener("click", startRound);
+  elements.nextRound.addEventListener("click", startRoundWithInternetCheck);
 
   elements.changeSettings.addEventListener("click", () => {
     renderSettings();
@@ -455,3 +460,113 @@ window.addEventListener("load", () => {
     }, 350);
   }, 1500);
 });
+/* =========================
+   INTERNET CHECK
+   ========================= */
+
+const NETWORK_TEST_URLS = [
+  "https://connectivitycheck.gstatic.com/generate_204",
+  "https://www.msftconnecttest.com/connecttest.txt",
+  "https://cp.cloudflare.com/generate_204"
+];
+
+const networkGate = document.getElementById("network-gate");
+const networkTitle = document.getElementById("network-title");
+const networkText = document.getElementById("network-text");
+const networkRetry = document.getElementById("network-retry-btn");
+
+
+async function testNetworkUrl(url) {
+  const controller = new AbortController();
+
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, 3000);
+
+  try {
+    await fetch(
+      url + "?ralltrue_check=" + Date.now(),
+      {
+        method: "GET",
+        mode: "no-cors",
+        cache: "no-store",
+        signal: controller.signal
+      }
+    );
+
+    return true;
+  } catch (error) {
+    return false;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+
+async function hasInternetConnection() {
+  if (!navigator.onLine) {
+    return false;
+  }
+
+  const results = await Promise.all(
+    NETWORK_TEST_URLS.map(testNetworkUrl)
+  );
+
+  return results.some(result => result === true);
+}
+
+
+function showNoInternet() {
+  networkGate.classList.remove("is-hidden");
+
+  networkTitle.textContent =
+    "Нет подключения к интернету";
+
+  networkText.textContent =
+    "Для запуска игры требуется подключение к сети.";
+
+  networkRetry.hidden = false;
+}
+
+
+async function verifyInternetConnection() {
+  networkGate.classList.remove("is-hidden");
+
+  networkTitle.textContent =
+    "Проверяем интернет...";
+
+  networkText.textContent =
+    "Подождите несколько секунд.";
+
+  networkRetry.hidden = true;
+
+  const online = await hasInternetConnection();
+
+  if (online) {
+    networkGate.classList.add("is-hidden");
+  } else {
+    showNoInternet();
+  }
+
+  return online;
+}
+
+
+networkRetry.addEventListener("click", () => {
+  verifyInternetConnection();
+});
+
+
+window.addEventListener("online", () => {
+  verifyInternetConnection();
+});
+
+
+window.addEventListener("online", () => {
+  if (!networkGate.classList.contains("is-hidden")) {
+    verifyInternetConnection();
+  }
+});
+
+
+verifyInternetConnection();

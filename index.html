@@ -26,19 +26,65 @@
 
   </div>
 </div>
+<div id="network-gate" class="network-gate">
+  <div class="network-gate-content">
+
+    <div class="network-icon">!</div>
+
+    <p class="eyebrow">ПОДКЛЮЧЕНИЕ К СЕТИ</p>
+
+    <h2 id="network-title">Проверяем интернет...</h2>
+
+    <p id="network-text" class="network-text">
+      Подождите несколько секунд.
+    </p>
+
+    <button
+      id="network-retry-btn"
+      class="button button-primary"
+      type="button"
+      hidden
+    >
+      ПОВТОРИТЬ ПРОВЕРКУ
+    </button>
+
+  </div>
+</div>
   <main class="app-shell">
-    <section id="home-screen" class="screen active" aria-labelledby="home-title">
-      <div class="brand-mark" aria-hidden="true">?</div>
-      <p class="eyebrow">Игра для компании</p>
-      <h1 id="home-title">ШПИОН</h1>
-      <p class="lead">У всех похожие слова. Но кто-то получил другое.</p>
-      <button id="start-game-btn" class="button button-primary button-large">
-        НАЧАТЬ ПАРТИЮ
-      </button>
-      <button id="rules-btn" class="button button-secondary">
-  КАК ИГРАТЬ
-</button>
-    </section>
+    <section id="home-screen" class="screen active home-screen" aria-labelledby="home-title">
+
+  <div class="home-spy-wrap">
+    <img
+      src="assets/spy-hero.png"
+      class="home-spy"
+      alt=""
+    >
+  </div>
+
+  <p class="eyebrow home-eyebrow">
+    ИГРА ДЛЯ КОМПАНИИ
+  </p>
+
+  <h1 id="home-title" class="home-title">
+    <span>ДРУГОЙ</span>
+    <span>ШПИОН</span>
+  </h1>
+
+  <p class="lead home-lead">
+    У всех похожие слова. Но кто-то получил другое.
+  </p>
+
+  <div class="home-actions">
+    <button id="start-game-btn" class="button button-primary button-large">
+      НАЧАТЬ ПАРТИЮ
+    </button>
+
+    <button id="rules-btn" class="button button-secondary">
+      КАК ИГРАТЬ
+    </button>
+  </div>
+
+</section>
     <section id="rules-screen" class="screen rules-screen" aria-labelledby="rules-title">
 
   <div class="rules-header">
