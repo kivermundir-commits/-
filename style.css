@@ -947,3 +947,24 @@ h2 {
   font-weight: 850;
   letter-spacing: 0.04em;
 }
+@media (max-width: 560px) {
+  .home-lead {
+    position: static;
+    left: auto;
+    transform: none;
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 22px auto 36px;
+    padding: 0 6px;
+
+    text-align: center;
+
+    font-size: 1rem;
+    line-height: 1.45;
+
+    white-space: normal;
+    overflow-wrap: normal;
+  }
+}
