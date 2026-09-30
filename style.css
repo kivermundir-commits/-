@@ -26,13 +26,26 @@ html {
 body {
   min-height: 100vh;
   min-height: 100dvh;
+
   margin: 0;
   overflow-x: hidden;
+
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
   color: var(--text);
-  background:
-    radial-gradient(circle at 50% -10%, rgba(242, 193, 78, 0.16), transparent 32rem),
-    linear-gradient(180deg, #111218 0%, var(--bg) 100%);
+
+  background-color: #07080b;
+
+  background-image:
+    linear-gradient(
+      rgba(5, 6, 9, 0.34),
+      rgba(5, 6, 9, 0.48)
+    ),
+    url("assets/spy-ui-bg.png");
+
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
 button,
@@ -555,8 +568,8 @@ h2 {
   visibility: visible;
 
   transition:
-    opacity 0.32s ease,
-    visibility 0.32s ease;
+    opacity 0.42s ease,
+    visibility 0.42s ease;
 }
 
 .studio-splash-content {
@@ -813,12 +826,14 @@ h2 {
   position: relative;
   z-index: 1;
 
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-align: center;
 
-  padding-top: 18px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
+
 .home-screen::before {
   content: "";
 
@@ -826,36 +841,38 @@ h2 {
   inset: 0;
   z-index: -1;
 
-  background:
-    linear-gradient(
-      rgba(8, 9, 13, 0.50),
-      rgba(8, 9, 13, 0.80)
-    ),
-    url("assets/spy-dossier-bg.png");
+  background-image:
+  linear-gradient(
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.25)
+  ),
+  url("assets/spy-dossier-bg.png");
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
+
+/* Шпион */
 .home-spy-wrap {
+  position: relative;
+  z-index: 1;
+
   width: 100%;
 
   display: flex;
   justify-content: center;
 
-  margin-bottom: -42px;
+  margin-bottom: -95px;
 
   pointer-events: none;
-
-  position: relative;
-  z-index: 1;
 }
 
 .home-spy {
   display: block;
 
-  width: min(88vw, 520px);
+  width: min(76vw, 440px);
   height: auto;
 
   object-fit: contain;
@@ -865,74 +882,39 @@ h2 {
     drop-shadow(0 0 24px rgba(242, 193, 78, 0.16));
 }
 
-.home-eyebrow {
+
+/* Единый PNG с надписью */
+.home-title-image-wrap {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   width: 100%;
-  max-width: 620px;
 
-  margin-top: 0;
-  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
 
-  text-align: left;
+  margin-top: -45px;
+  margin-bottom: 18px;
 
-  transform: translate(24px, -6px);
+  pointer-events: none;
 }
 
-#home-title.home-title {
-  position: relative;
-  z-index: 2;
-
-  width: min(88vw, 520px);
-  max-width: none;
-
-  margin: -8px auto 0;
-
-  text-align: center;
-
-  font-size: clamp(5rem, 17vw, 7.5rem);
-  line-height: 0.77;
-  letter-spacing: -0.06em;
-  font-weight: 800;
-}
-
-#home-title.home-title .home-title-line {
+.home-title-image {
   display: block;
-  width: 100%;
+
+  width: 86%;
+  max-width: 440px;
+  height: auto;
+
+  object-fit: contain;
 }
 
-#home-title.home-title .home-title-d {
-  display: inline-block;
 
-  font-size: 0.94em;
-  transform: translateY(-0.035em);
-}
-
-.home-lead {
-  position: relative;
-  left: 50%;
-  transform: translateX(calc(-50% - 12px));
-
-  width: max-content;
-  max-width: 96vw;
-
-  margin: 30px 0 38px;
-
-  text-align: center;
-  color: var(--muted);
-
-  font-size: clamp(1.1rem, 3vw, 1.32rem);
-  line-height: 1.4;
-  letter-spacing: 0.005em;
-
-  white-space: nowrap;
-  overflow-wrap: normal;
-}
-
+/* Кнопки */
 .home-actions {
   width: 100%;
   max-width: 620px;
+  margin-top: -40px;
 
   display: flex;
   flex-direction: column;
@@ -947,24 +929,49 @@ h2 {
   font-weight: 850;
   letter-spacing: 0.04em;
 }
+
+
+/* Телефон */
 @media (max-width: 560px) {
-  .home-lead {
-    position: static;
-    left: auto;
-    transform: none;
+  
 
-    width: 100%;
-    max-width: 100%;
+  .home-spy-wrap {
+    margin-bottom: -85px;
+  }
 
-    margin: 22px auto 36px;
-    padding: 0 6px;
+  .home-title-image {
+  width: 86%;
+  max-width: 440px;
+}
+}
+#card-screen {
+  position: relative;
+}
 
-    text-align: center;
+#card-screen::before {
+  content: "";
 
-    font-size: 1rem;
-    line-height: 1.45;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
 
-    white-space: normal;
-    overflow-wrap: normal;
+  background: rgba(0, 0, 0, 0.18);
+
+  pointer-events: none;
+}
+@media (max-width: 560px) {
+  .home-screen::before {
+    background-image:
+  linear-gradient(
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.25)
+  ),
+  url("assets/spy-dossier-bg.png");
+
+    background-size: 100% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+
+    background-color: #050505;
   }
 }
