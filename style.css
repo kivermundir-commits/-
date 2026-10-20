@@ -1259,3 +1259,621 @@ h2 {
   width: 100%;
   margin-top: auto;
 }
+/* =========================================================
+   ДОСЬЕ ИГРОКА
+   ========================================================= */
+
+
+/* Большая карточка.
+   ВАЖНО: 26px по бокам — как у третьей карточки */
+.secret-card.dossier-card {
+  padding: 30px 26px 26px;
+
+  display: block;
+
+  background: #11151d;
+
+  border: 1px solid rgba(242, 193, 78, 0.35);
+  border-radius: 32px;
+
+  overflow: hidden;
+
+  transform: none;
+}
+
+
+/* Убираем старое увеличение открытой карточки */
+.secret-card.dossier-card.revealed {
+  transform: none;
+
+  background: #11151d;
+
+  border-color: rgba(242, 193, 78, 0.35);
+}
+
+
+/* Оба состояния занимают одну и ту же площадь */
+.dossier-state {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ДОСКА РАССЛЕДОВАНИЯ
+   ========================================================= */
+
+.dossier-board {
+  position: relative;
+
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px 10px 22px;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  /*
+    Почти пустая тёмная пробковая/войлочная доска.
+    Потом при желании заменим её отдельным PNG.
+  */
+  background:
+    radial-gradient(
+      circle at 18% 20%,
+      rgba(242, 193, 78, 0.08),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 82% 74%,
+      rgba(242, 193, 78, 0.05),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #17130e 0%,
+      #0f0d0a 48%,
+      #17120c 100%
+    );
+
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.65),
+    inset 0 0 0 1px rgba(242, 193, 78, 0.08);
+}
+
+
+/* лёгкая фактура доски */
+.dossier-board::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.25;
+
+  background-image:
+    repeating-linear-gradient(
+      17deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+
+/* =========================================================
+   ОБЩАЯ ПАПКА
+   ========================================================= */
+
+.dossier-folder {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 430px;
+}
+
+
+/* =========================================================
+   ЗАКРЫТАЯ ПАПКА
+   ========================================================= */
+
+.dossier-folder-cover {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1.55 / 1;
+
+  padding: 30px 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid rgba(242, 193, 78, 0.58);
+  border-radius: 15px 15px 22px 22px;
+
+  color: #21180c;
+
+  background:
+    radial-gradient(
+      circle at 25% 20%,
+      rgba(255, 255, 255, 0.20),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #c99b55 0%,
+      #b9833d 48%,
+      #9d6c31 100%
+    );
+
+  box-shadow:
+    0 18px 35px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 240, 192, 0.45);
+
+  overflow: hidden;
+}
+
+
+/* язычок обычной архивной папки */
+.dossier-folder-cover::before {
+  content: "";
+
+  position: absolute;
+
+  width: 42%;
+  height: 26px;
+
+  top: -13px;
+  left: 8%;
+
+  border-radius: 10px 10px 0 0;
+
+  background: #b78340;
+
+  border:
+    2px solid rgba(242, 193, 78, 0.45);
+
+  border-bottom: 0;
+}
+
+
+/* потёртости бумаги */
+.dossier-folder-cover::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      112deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.10) 21%,
+      transparent 22%
+    ),
+    repeating-linear-gradient(
+      8deg,
+      rgba(50, 30, 10, 0.025) 0,
+      rgba(50, 30, 10, 0.025) 2px,
+      transparent 2px,
+      transparent 7px
+    );
+}
+
+
+/* пока символ-заглушка.
+   Позже можно заменить PNG-шпионом */
+.dossier-spy-mark {
+  position: relative;
+  z-index: 2;
+
+  width: 48px;
+  height: 48px;
+
+  margin-bottom: 14px;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid rgba(40, 27, 10, 0.7);
+  border-radius: 50%;
+
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+
+.dossier-cover-title {
+  position: relative;
+  z-index: 2;
+
+  margin: 0 0 16px;
+
+  color: #20170b;
+
+  font-size: clamp(1.5rem, 6vw, 2.35rem);
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: -0.035em;
+
+  text-align: center;
+  text-transform: uppercase;
+}
+
+
+.dossier-case-number {
+  position: relative;
+  z-index: 2;
+
+  padding: 8px 16px;
+
+  border: 1px solid rgba(40, 27, 10, 0.45);
+
+  color: rgba(32, 23, 11, 0.9);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+
+.dossier-secret-stamp {
+  position: absolute;
+  z-index: 2;
+
+  right: 18px;
+  bottom: 18px;
+
+  padding: 5px 10px;
+
+  border: 3px solid rgba(143, 35, 28, 0.72);
+
+  color: rgba(143, 35, 28, 0.78);
+
+  font-size: 0.85rem;
+  font-weight: 950;
+  letter-spacing: 0.05em;
+
+  transform: rotate(-8deg);
+}
+
+
+/* =========================================================
+   ОТКРЫТАЯ ПАПКА
+   ========================================================= */
+
+.dossier-folder-open {
+  position: relative;
+
+  width: 100%;
+
+  padding-top: 44px;
+
+  perspective: 1100px;
+  transform-style: preserve-3d;
+}
+
+
+/*
+  Это визуальная "обложка",
+  которая откидывается НАВЕРХ.
+*/
+.dossier-folder-open::before {
+  content: "";
+
+  position: absolute;
+  z-index: 5;
+
+  top: 42px;
+  left: 0;
+
+  width: 100%;
+  height: 54%;
+
+  border: 2px solid rgba(242, 193, 78, 0.58);
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #c99b55 0%,
+      #a87535 100%
+    );
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.44);
+
+  transform-origin: top center;
+
+  animation:
+    dossier-cover-open
+    620ms
+    cubic-bezier(0.22, 0.78, 0.2, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   ЛИСТ СО СЛОВОМ
+   ========================================================= */
+
+.dossier-word-sheet {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+
+  min-height: 145px;
+
+  padding: 24px 18px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid rgba(242, 193, 78, 0.55);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e1c28c 0%,
+      #cfa96d 100%
+    );
+
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.36);
+
+  opacity: 0;
+  transform: translateY(24px);
+
+  animation:
+    dossier-word-in
+    420ms
+    ease
+    180ms
+    forwards;
+}
+
+
+.dossier-word-label {
+  margin: 0 0 14px;
+
+  color: rgba(40, 26, 8, 0.7);
+
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+
+/* динамическое слово */
+.dossier-card .secret-word {
+  margin: 0;
+
+  max-width: 100%;
+
+  color: #171109;
+
+  font-size: clamp(1.8rem, 8vw, 3.3rem);
+  font-weight: 950;
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+
+  text-align: center;
+
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+
+/* =========================================================
+   ВЫЕЗЖАЮЩИЙ ЛИСТ СО СПРАВКОЙ
+   ========================================================= */
+
+.dossier-info-sheet {
+  position: relative;
+  z-index: 2;
+
+  width: 92%;
+
+  margin: 10px auto 0;
+
+  min-height: 115px;
+
+  padding: 22px 20px 24px;
+
+  border-radius: 5px 5px 12px 12px;
+
+  color: #282117;
+
+  background:
+    linear-gradient(
+      145deg,
+      #eee0bf 0%,
+      #d7c29b 100%
+    );
+
+  box-shadow:
+    0 13px 24px rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  transform: translateY(-55px);
+
+  animation:
+    dossier-info-out
+    470ms
+    cubic-bezier(0.16, 0.82, 0.25, 1)
+    330ms
+    forwards;
+}
+
+
+.dossier-info-heading {
+  margin-bottom: 10px;
+
+  color: rgba(70, 50, 22, 0.55);
+
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.20em;
+
+  text-transform: uppercase;
+}
+
+
+.secret-description {
+  margin: 0;
+
+  color: #2a2116;
+
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.38;
+
+  text-align: center;
+}
+
+
+/* штамп на листе немного меньше */
+.dossier-info-sheet .dossier-secret-stamp {
+  right: 12px;
+  bottom: 10px;
+
+  font-size: 0.62rem;
+
+  opacity: 0.65;
+}
+
+
+/* =========================================================
+   КНОПКИ
+   ========================================================= */
+
+/*
+  Используем существующую button/button-primary/button-large.
+  Поэтому визуально это ТА ЖЕ кнопка, что "Я ГОТОВ".
+*/
+.dossier-card .card-action-wrap {
+  width: 100%;
+
+  flex: 0 0 auto;
+
+  margin-top: 18px;
+}
+
+
+.dossier-card .card-action-wrap .button {
+  margin-top: 0;
+}
+
+
+/* visual-only уже есть,
+   но оставляем на всякий случай */
+.dossier-card .is-visual {
+  pointer-events: none;
+  user-select: none;
+}
+
+
+/* =========================================================
+   АНИМАЦИИ
+   ========================================================= */
+
+@keyframes dossier-cover-open {
+
+  0% {
+    transform:
+      rotateX(0deg)
+      translateY(0);
+
+    opacity: 1;
+  }
+
+  72% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      rotateX(-112deg)
+      translateY(-14px);
+
+    opacity: 0;
+  }
+
+}
+
+
+@keyframes dossier-word-in {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(24px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+
+@keyframes dossier-info-out {
+
+  from {
+    opacity: 0;
+    transform: translateY(-55px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* На случай системной настройки "без анимации" */
+@media (prefers-reduced-motion: reduce) {
+
+  .dossier-folder-open::before,
+  .dossier-word-sheet,
+  .dossier-info-sheet {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+
+}

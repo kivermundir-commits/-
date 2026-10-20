@@ -307,54 +307,120 @@
       <div id="card-stage" class="card-stage">
         <article
   id="secret-card"
-  class="secret-card"
+  class="secret-card dossier-card"
   tabindex="0"
   role="button"
   aria-live="polite"
 >
 
-  <!-- КАРТОЧКА 1: игрок ещё не видел слово -->
-  <div id="card-closed-content" class="card-face">
+  <!-- =========================
+       СОСТОЯНИЕ 1 — ДОСЬЕ ЗАКРЫТО
+       ========================= -->
 
-    <p class="card-kicker">Карточка игрока</p>
+  <div id="card-closed-content" class="dossier-state dossier-closed">
 
-    <h2 id="card-title" class="player-number">1</h2>
-    <div class="card-slot card-slot--empty" aria-hidden="true"></div>
+    <div class="dossier-board">
+
+      <div class="dossier-folder">
+
+        <div class="dossier-folder-cover">
+
+          <div class="dossier-spy-mark" aria-hidden="true">
+            ◉
+          </div>
+
+          <p class="dossier-cover-title">
+            КАРТОЧКА ИГРОКА
+          </p>
+
+          <div class="dossier-case-number">
+            ДЕЛО ИГРОКА №
+            <span id="card-title">1</span>
+          </div>
+
+          <div class="dossier-secret-stamp">
+            СЕКРЕТНО
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
 
     <div class="card-action-wrap">
-      <div class="card-action-wrap">
-  <button
-    class="button button-primary button-large is-visual"
-    type="button"
-    tabindex="-1"
-  >
-    ПОКАЗАТЬ СЛОВО
-  </button>
-</div>
+      <button
+        class="button button-primary button-large is-visual"
+        type="button"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        ПОКАЗАТЬ СЛОВО
+      </button>
     </div>
 
   </div>
 
 
-  <!-- КАРТОЧКА 2: слово показано -->
-  <div id="card-revealed-content" class="card-face hidden">
 
-    <p class="card-kicker">Твоё слово</p>
+  <!-- =========================
+       СОСТОЯНИЕ 2 — ДОСЬЕ ОТКРЫТО
+       ========================= -->
 
-    <div class="card-slot card-slot--filled">
-      <h2 id="secret-word" class="secret-word">СЛОВО</h2>
+  <div id="card-revealed-content" class="dossier-state dossier-open hidden">
+
+    <div class="dossier-board">
+
+      <div class="dossier-folder dossier-folder-open">
+
+
+        <!-- Верхняя открытая часть папки -->
+        <div class="dossier-word-sheet">
+
+          <p class="dossier-word-label">
+            ТВОЁ СЛОВО
+          </p>
+
+          <h2 id="secret-word" class="secret-word">
+            СЛОВО
+          </h2>
+
+        </div>
+
+
+        <!-- Нижний лист со справкой -->
+        <div class="dossier-info-sheet">
+
+          <div class="dossier-info-heading">
+            СПРАВКА
+          </div>
+
+          <p id="secret-description" class="secret-description">
+            Краткое описание слова появится здесь.
+          </p>
+
+          <div class="dossier-secret-stamp">
+            СЕКРЕТНО
+          </div>
+
+        </div>
+
+
+      </div>
+
     </div>
 
+
     <div class="card-action-wrap">
-      <div class="card-action-wrap">
-  <button
-    class="button button-primary button-large is-visual"
-    type="button"
-    tabindex="-1"
-  >
-    СКРЫТЬ СЛОВО
-  </button>
-</div>
+      <button
+        class="button button-primary button-large is-visual"
+        type="button"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        СКРЫТЬ СЛОВО
+      </button>
     </div>
 
   </div>
