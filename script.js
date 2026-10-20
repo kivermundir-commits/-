@@ -446,6 +446,43 @@ elements.rulesBack.addEventListener("click", () => {
   });
 
   restoreInterface();
+  const aboutRalltrueButton =
+  document.getElementById("about-ralltrue-btn");
+
+const aboutRalltrueModal =
+  document.getElementById("about-ralltrue-modal");
+
+const aboutRalltrueClose =
+  document.getElementById("about-ralltrue-close");
+
+const aboutRalltrueBackdrop =
+  document.getElementById("about-ralltrue-backdrop");
+
+
+function openAboutRalltrue() {
+  aboutRalltrueModal.classList.remove("hidden");
+}
+
+
+function closeAboutRalltrue() {
+  aboutRalltrueModal.classList.add("hidden");
+}
+
+
+aboutRalltrueButton.addEventListener(
+  "click",
+  openAboutRalltrue
+);
+
+aboutRalltrueClose.addEventListener(
+  "click",
+  closeAboutRalltrue
+);
+
+aboutRalltrueBackdrop.addEventListener(
+  "click",
+  closeAboutRalltrue
+);
 })();
 window.addEventListener("load", () => {
   const splash = document.getElementById("studio-splash");

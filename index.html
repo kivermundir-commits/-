@@ -52,6 +52,17 @@
 </div>
   <main class="app-shell">
     <section id="home-screen" class="screen active home-screen" aria-label="Другой Шпион">
+      <button id="about-ralltrue-btn" class="ralltrue-credit" type="button">
+  <img
+    src="assets/ralltrue-avatar.jpg"
+    class="ralltrue-credit-avatar"
+    alt=""
+  >
+
+  <span>
+    By <strong>Ralltrue</strong>
+  </span>
+</button>
 
   <div class="home-spy-wrap">
     <img
@@ -294,34 +305,82 @@
       </div>
 
       <div id="card-stage" class="card-stage">
-        <article id="secret-card" class="secret-card" tabindex="0" role="button" aria-live="polite">
-          <div id="card-closed-content" class="card-face">
-            <p class="card-kicker">КАРТОЧКА ИГРОКА</p>
-            <h2 id="card-title" class="player-number">1</h2>
-            <div class="eye-icon" aria-hidden="true">◉</div>
-            <p>Убедись, что никто не смотрит на экран</p>
-            <strong>Свайпни или нажми, чтобы увидеть слово</strong>
-          </div>
+        <article
+  id="secret-card"
+  class="secret-card"
+  tabindex="0"
+  role="button"
+  aria-live="polite"
+>
 
-          <div id="card-revealed-content" class="card-face hidden">
-            <p class="card-kicker">ТВОЁ СЛОВО</p>
-            <h2 id="secret-word" class="secret-word">СЛОВО</h2>
-            <p>Запомни его и никому не показывай</p>
-            <strong>Свайпни или нажми ещё раз, чтобы скрыть</strong>
-          </div>
-        </article>
+  <!-- КАРТОЧКА 1: игрок ещё не видел слово -->
+  <div id="card-closed-content" class="card-face">
+
+    <p class="card-kicker">Карточка игрока</p>
+
+    <h2 id="card-title" class="player-number">1</h2>
+    <div class="card-slot card-slot--empty" aria-hidden="true"></div>
+
+    <div class="card-action-wrap">
+      <div class="card-action-wrap">
+  <button
+    class="button button-primary button-large is-visual"
+    type="button"
+    tabindex="-1"
+  >
+    ПОКАЗАТЬ СЛОВО
+  </button>
+</div>
+    </div>
+
+  </div>
+
+
+  <!-- КАРТОЧКА 2: слово показано -->
+  <div id="card-revealed-content" class="card-face hidden">
+
+    <p class="card-kicker">Твоё слово</p>
+
+    <div class="card-slot card-slot--filled">
+      <h2 id="secret-word" class="secret-word">СЛОВО</h2>
+    </div>
+
+    <div class="card-action-wrap">
+      <div class="card-action-wrap">
+  <button
+    class="button button-primary button-large is-visual"
+    type="button"
+    tabindex="-1"
+  >
+    СКРЫТЬ СЛОВО
+  </button>
+</div>
+    </div>
+
+  </div>
+
+</article>
 
         <div id="handoff-panel" class="handoff-panel hidden">
-          <div class="locked-icon" aria-hidden="true">✓</div>
-          <h2>Карточка закрыта</h2>
-          <p id="handoff-text">Передайте телефон игроку 2</p>
-          <button id="ready-next-btn" class="button button-primary button-large">
-            Я ГОТОВ
-          </button>
-        </div>
+
+  <img
+    src="assets/pass-phone.png"
+    class="handoff-image"
+    alt=""
+  >
+
+  <p id="handoff-text">
+    Передайте телефон игроку 2
+  </p>
+
+  <button id="ready-next-btn" class="button button-primary button-large">
+    Я ГОТОВ
+  </button>
+
+</div>
       </div>
 
-      <p class="swipe-hint">Можно свайпать в любую сторону</p>
+      
     </section>
 
     <section id="complete-screen" class="screen" aria-labelledby="complete-title">
@@ -366,6 +425,73 @@
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
   <script src="words.js"></script>
+  <div id="about-ralltrue-modal" class="about-ralltrue-modal hidden">
+
+  <div
+    id="about-ralltrue-backdrop"
+    class="about-ralltrue-backdrop"
+  ></div>
+
+  <div class="about-ralltrue-card">
+
+    <button
+      id="about-ralltrue-close"
+      class="about-ralltrue-close"
+      type="button"
+      aria-label="Закрыть"
+    >
+      ×
+    </button>
+
+    <div class="about-ralltrue-header">
+
+      <img
+        src="assets/ralltrue-avatar.jpg"
+        class="about-ralltrue-avatar"
+        alt=""
+      >
+
+      <div>
+        <p class="about-ralltrue-label">СОЗДАТЕЛИ</p>
+        <h2>Ralltrue Studio</h2>
+      </div>
+
+    </div>
+
+    <p class="about-ralltrue-text">
+      «Другой Шпион» — игра для компании, построенная вокруг
+      простой идеи: у всех похожие слова, но кто-то получил другое.
+    </p>
+
+    <p class="about-ralltrue-text">
+      Игра разработана небольшой командой Ralltrue.
+      Мы создаём проекты, в которых простая механика сочетается
+      с атмосферным визуальным стилем и живым общением между игроками.
+    </p>
+
+    <div class="about-ralltrue-socials">
+
+      <a href="#" target="_blank" rel="noopener">
+        VK
+      </a>
+
+      <a href="#" target="_blank" rel="noopener">
+        Telegram
+      </a>
+
+      <a href="#" target="_blank" rel="noopener">
+        TikTok
+      </a>
+
+    </div>
+
+    <p class="about-ralltrue-footer">
+      Ralltrue Studio · 2026
+    </p>
+
+  </div>
+
+</div>
   <script src="script.js"></script>
 </body>
 </html>

@@ -321,7 +321,7 @@ h2 {
   position: relative;
   display: grid;
   place-items: center;
-  padding: 34px 24px;
+  padding: 34px 26px 26px;
   overflow: hidden;
   cursor: pointer;
   user-select: none;
@@ -354,40 +354,39 @@ h2 {
 
 .card-face {
   position: relative;
-  z-index: 1;
+
   width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   text-align: center;
+  box-sizing: border-box;
 }
 
 .card-kicker {
-  margin: 0 0 18px;
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.18em;
+  margin: 0 0 26px;
+
+  color: #f4f2ea;
+
+  font-size: clamp(2rem, 5.4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: none;
+
+  text-align: center;
 }
 
 .player-number {
-  font-size: clamp(5rem, 30vw, 9rem);
-  color: var(--accent);
-}
+  font-size: clamp(6rem, 34vw, 10rem);
+  line-height: 0.9;
 
-.eye-icon,
-.locked-icon,
-.complete-icon {
-  display: grid;
-  place-items: center;
-  margin: 20px auto;
-  border-radius: 50%;
   color: var(--accent);
-  background: rgba(242, 193, 78, 0.08);
-  border: 1px solid rgba(242, 193, 78, 0.25);
-}
 
-.eye-icon {
-  width: 76px;
-  height: 76px;
-  font-size: 2rem;
+  transform: translateY(-10px);
 }
 
 .card-face p:not(.card-kicker) {
@@ -405,46 +404,46 @@ h2 {
 }
 
 .secret-word {
-  margin: 42px 0;
-  color: var(--accent);
-  font-size: clamp(2.3rem, 13vw, 5.2rem);
-  line-height: 0.98;
-  letter-spacing: -0.05em;
+  margin: 0;
+
+  color: #090f1c;
+
+  font-size: clamp(2rem, 9vw, 4.4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+
+  text-align: center;
+
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .handoff-panel {
+  width: 100%;
+  min-height: min(64vh, 590px);
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 34px 26px;
+  align-items: center;
+
+  padding: 30px 26px 26px;
+
+  border: 1px solid rgba(242, 193, 78, 0.35);
+  border-radius: 32px;
+
+  background: rgba(20, 22, 27, 0.96);
+  box-shadow: var(--shadow);
+
   text-align: center;
-  border: 1px solid var(--line);
-  background: var(--surface);
 }
 
-.handoff-panel p {
-  margin: 18px 0 28px;
-  color: var(--muted);
-  font-size: 1.05rem;
-}
-
-.locked-icon,
-.complete-icon {
-  width: 78px;
-  height: 78px;
-  font-size: 2rem;
-  font-weight: 900;
-}
-
-.swipe-hint {
-  margin: 14px 0 0;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
-
-.complete-icon {
-  margin: 0 0 24px;
+.handoff-panel .button,
+#ready-next-btn {
+  margin-top: auto;
+  width: 100%;
+  max-width: 540px;
 }
 
 .summary-card {
@@ -843,8 +842,8 @@ h2 {
 
   background-image:
   linear-gradient(
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.25)
+    rgba(0, 0, 0, 0.50),
+    rgba(0, 0, 0, 0.50)
   ),
   url("assets/spy-dossier-bg.png");
 
@@ -893,7 +892,7 @@ h2 {
   display: flex;
   justify-content: center;
 
-  margin-top: -45px;
+  margin-top: -20px;
   margin-bottom: 18px;
 
   pointer-events: none;
@@ -963,8 +962,8 @@ h2 {
   .home-screen::before {
     background-image:
   linear-gradient(
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.25)
+    rgba(0, 0, 0, 0.50),
+    rgba(0, 0, 0, 0.50)
   ),
   url("assets/spy-dossier-bg.png");
 
@@ -974,4 +973,289 @@ h2 {
 
     background-color: #050505;
   }
+}
+
+/* ОДНА ПАНЕЛЬ — ДВА СОСТОЯНИЯ */
+
+.card-slot {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 210px;
+
+  width: 100%;
+  height: 120px;
+
+  margin: 0;
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid rgba(242, 193, 78, 0.95);
+  border-radius: 26px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 0 0 2px rgba(242, 193, 78, 0.18) inset,
+    0 0 24px rgba(242, 193, 78, 0.22);
+}
+
+
+/* Панель ДО показа слова */
+
+.card-slot--empty {
+  background: rgba(8, 12, 20, 0.25);
+}
+
+
+/* Та же панель ПОСЛЕ показа слова */
+
+.card-slot--filled {
+  background: rgba(255, 252, 243, 0.92);
+}
+
+/* =========================
+   RALLTRUE CREDIT
+   ========================= */
+
+.ralltrue-credit {
+  position: absolute;
+  z-index: 10;
+
+  top: 14px;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 6px 11px 6px 7px;
+
+  border: 1px solid rgba(242, 193, 78, 0.24);
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(8, 9, 13, 0.46);
+
+  backdrop-filter: blur(8px);
+
+  font-size: 0.76rem;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.ralltrue-credit strong {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.ralltrue-credit-avatar {
+  width: 28px;
+  height: 28px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 1px solid rgba(242, 193, 78, 0.65);
+}
+
+
+/* ABOUT MODAL */
+
+.about-ralltrue-modal {
+  position: fixed;
+  z-index: 10000;
+
+  inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  padding: 18px;
+}
+
+.about-ralltrue-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(8px);
+}
+
+.about-ralltrue-card {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 480px);
+
+  padding: 26px 22px 22px;
+
+  border: 1px solid rgba(242, 193, 78, 0.32);
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(242, 193, 78, 0.07),
+      transparent 35%
+    ),
+    #15171c;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(242, 193, 78, 0.08);
+}
+
+.about-ralltrue-close {
+  position: absolute;
+
+  top: 14px;
+  right: 16px;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.07);
+
+  font-size: 1.5rem;
+
+  cursor: pointer;
+}
+
+.about-ralltrue-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 22px;
+}
+
+.about-ralltrue-avatar {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 2px solid var(--accent);
+}
+
+.about-ralltrue-label {
+  margin: 0 0 4px;
+
+  color: var(--accent);
+
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+}
+
+.about-ralltrue-header h2 {
+  margin: 0;
+
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+}
+
+.about-ralltrue-text {
+  margin: 0 0 14px;
+
+  color: var(--muted);
+
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.about-ralltrue-socials {
+  display: flex;
+  gap: 9px;
+
+  margin-top: 22px;
+}
+
+.about-ralltrue-socials a {
+  flex: 1;
+
+  padding: 13px 10px;
+
+  border: 1px solid rgba(242, 193, 78, 0.25);
+  border-radius: 14px;
+
+  text-align: center;
+  text-decoration: none;
+
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.about-ralltrue-socials a:active {
+  transform: scale(0.97);
+}
+
+.about-ralltrue-footer {
+  margin: 20px 0 0;
+
+  text-align: center;
+
+  color: rgba(255, 255, 255, 0.35);
+
+  font-size: 0.72rem;
+}
+
+#handoff-text {
+  width: 100%;
+
+  margin: 0 auto 24px;
+
+  color: var(--text);
+
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.035em;
+
+  text-align: center;
+}
+
+#ready-next-btn {
+  width: 100%;
+
+  margin-top: auto;
+
+  min-height: 64px;
+}
+
+.handoff-image {
+  display: block;
+
+  width: min(90%, 430px);
+  height: auto;
+
+  margin: 20px auto 28px;
+
+  object-fit: contain;
+
+  pointer-events: none;
+}
+
+.is-visual {
+  pointer-events: none;
+  user-select: none;
+}
+
+.card-action-wrap {
+  width: 100%;
+  margin-top: auto;
 }
